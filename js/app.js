@@ -246,3 +246,72 @@ document.addEventListener('DOMContentLoaded', () => {
     if (text && !link.title) link.title = text;
   });
 });
+
+/* ============================================================
+   HERO CAROUSEL
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('carouselTrack');
+  const dots  = document.getElementById('carouselDots');
+  if (!track) return;
+
+  // Fallback if PRODUCTS isn't loaded
+  if (typeof PRODUCTS === 'undefined' || !Array.isArray(PRODUCTS)) {
+    track.innerHTML = '<div class="carousel-slide" style="display:grid;place-items:center;color:var(--text-dim)">Loading…</div>';
+    return;
+  }
+
+  const featured = PRODUCTS.slice(0, 6);
+
+  track.innerHTML = featured.map(p =>
+    '<div class="carousel-slide" data-id="' + p.id + '">' +
+      '<img src="' + (p.image || 'https://picsum.photos/seed/fallback/500/400') + '" alt="' + p.title + '" loading="lazy" onerror="this.style.display=\'none\'" />' +
+      '<div class="slide-overlay">' +
+        '<div class="slide-title">' + p.title + '</div>' +
+        '<div class="slide-price">' + p.price + ' · ' + p.location + '</div>' +
+      '</div>' +
+    '</div>'
+  ).join('');
+
+  if (dots) {
+    dots.innerHTML = featured.map((_, i) => '<span data-i="' + i + '"></span>').join('');
+    const dotEls = dots.querySelectorAll('span');
+
+    function updateDots() {
+      const slideW = track.querySelector('.carousel-slide')?.offsetWidth || 1;
+      const idx = Math.round(track.scrollLeft / (slideW + 16));
+      dotEls.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+    track.addEventListener('scroll', updateDots);
+    updateDots();
+  }
+
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  if (prevBtn) prevBtn.onclick = () => {
+    const w = (track.querySelector('.carousel-slide')?.offsetWidth || 300) + 16;
+    track.scrollBy({ left: -w, behavior: 'smooth' });
+  };
+  if (nextBtn) nextBtn.onclick = () => {
+    const w = (track.querySelector('.carousel-slide')?.offsetWidth || 300) + 16;
+    track.scrollBy({ left: w, behavior: 'smooth' });
+  };
+
+  track.querySelectorAll('.carousel-slide').forEach(el => {
+    el.onclick = () => {
+      const p = PRODUCTS.find(x => x.id === Number(el.dataset.id));
+      if (p && typeof showProduct === 'function') showProduct(p);
+    };
+  });
+
+  // Auto-advance every 5s
+  setInterval(() => {
+    const w = (track.querySelector('.carousel-slide')?.offsetWidth || 300) + 16;
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= max - 4) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: w, behavior: 'smooth' });
+    }
+  }, 5000);
+});
