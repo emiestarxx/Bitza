@@ -315,3 +315,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 5000);
 });
+
+/* ===== Menu button toggles sidebar ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menuBtn');
+  if (!menuBtn) return;
+
+  // Replace whatever onclick was there with our own
+  menuBtn.onclick = () => {
+    const s = document.getElementById('sidebar');
+    const b = document.getElementById('sidebarBackdrop');
+    if (window.innerWidth > 900) {
+      // Desktop: collapse to icon rail
+      document.body.classList.toggle('sidebar-collapsed');
+    } else {
+      // Mobile: open the drawer
+      if (s) s.classList.add('open');
+      if (b) b.classList.add('show');
+      document.body.classList.add('no-scroll');
+    }
+  };
+});
+
+/* ===== Carousel: advance one slide at a time ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+
+  function slideWidth() {
+    const s = track.querySelector('.carousel-slide');
+    return s ? s.offsetWidth : 300;
+  }
+  function goNext() {
+    const w = slideWidth();
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= max - 5) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: w, behavior: 'smooth' });
+    }
+  }
+  function goPrev() {
+    const w = slideWidth();
+    track.scrollBy({ left: -w, behavior: 'smooth' });
+  }
+
+  // Override the buttons (last listener wins)
+  const prev = document.getElementById('carouselPrev');
+  const next = document.getElementById('carouselNext');
+  if (prev) prev.onclick = goPrev;
+  if (next) next.onclick = goNext;
+
+  // Stop any existing auto-advance and start a clean one
+  window._bitzaCarouselInterval && clearInterval(window._bitzaCarouselInterval);
+  window._bitzaCarouselInterval = setInterval(goNext, 6000);
+});

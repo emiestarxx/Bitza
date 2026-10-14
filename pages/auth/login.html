@@ -1,7 +1,15 @@
 ﻿<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Login — Bitza</title>
-<link rel="stylesheet" href="../../css/variables.css" /><link rel="stylesheet" href="../../css/style.css" /><link rel="stylesheet" href="../../css/components.css" />
-</head><body>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In — Bitza</title>
+<link rel="stylesheet" href="../../css/variables.css" />
+<link rel="stylesheet" href="../../css/style.css" />
+<link rel="stylesheet" href="../../css/components.css" />
+</head>
+<body>
+
 <header class="topbar">
   <a href="../../index.html" class="icon-btn" aria-label="Back">
     <i data-lucide="arrow-left"></i>
@@ -12,14 +20,57 @@
   </a>
   <div class="topnav-right"></div>
 </header>
-<main style="max-width:420px;margin:60px auto;padding:0 20px">
-<div class="modal-card" style="position:static;max-width:100%">
-<h3>Welcome back</h3>
-<p class="muted">Log in to save items and chat with sellers.</p>
-<input type="email" placeholder="Email address" />
-<input type="password" placeholder="Password" />
-<button class="btn primary full">Log In</button>
-<p class="muted small">New here? <a href="#">Create an account</a></p>
-</div></main>
-<script src="../../js/theme.js"></script><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script><script>lucide.createIcons();</script></body></html>
 
+<main style="max-width:440px;margin:50px auto;padding:0 20px">
+
+  <!-- LOGIN VIEW -->
+  <div class="modal-card" id="loginView" style="position:static;max-width:100%">
+    <h3>Welcome back</h3>
+    <p class="muted">Log in to save items and chat with sellers.</p>
+    <input type="email" placeholder="Email address" />
+    <input type="password" placeholder="Password" />
+    <button class="btn primary full">Log In</button>
+    <p class="muted small">New here?
+      <a href="#" id="showSignup">Create an account</a>
+    </p>
+  </div>
+
+  <!-- SIGNUP VIEW -->
+  <div class="modal-card" id="signupView" style="position:static;max-width:100%;display:none">
+    <h3>Create your account</h3>
+    <p class="muted">Join Bitza — it's free.</p>
+    <input type="text" placeholder="Full name" />
+    <input type="email" placeholder="Email address" />
+    <input type="tel" placeholder="Phone number" />
+    <input type="password" placeholder="Create a password" />
+    <input type="password" placeholder="Confirm password" />
+    <button class="btn primary full">Create Account</button>
+    <p class="muted small">Already have an account?
+      <a href="#" id="showLogin">Log in</a>
+    </p>
+  </div>
+
+</main>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    const loginView = document.getElementById('loginView');
+    const signupView = document.getElementById('signupView');
+
+    document.getElementById('showSignup').onclick = (e) => {
+      e.preventDefault();
+      loginView.style.display = 'none';
+      signupView.style.display = 'flex';
+    };
+    document.getElementById('showLogin').onclick = (e) => {
+      e.preventDefault();
+      signupView.style.display = 'none';
+      loginView.style.display = 'flex';
+    };
+  });
+</script>
+</body>
+</html>
