@@ -617,47 +617,6 @@ body {
   border-radius: 8px;
   color: var(--text-dim);
   cursor: pointer;
-  display: grid;
-  place-items: center;
-  z-index: 10;
-  transition: 0.2s;
-}
-.sidebar-collapse:hover { color: var(--green); border-color: var(--green); }
-.sidebar-collapse svg { width: 16px; height: 16px; transition: transform 0.25s; }
-.sidebar { position: relative; }
-
-/* Collapsed state */
-body.sidebar-collapsed .sidebar {
-  flex: 0 0 68px !important;
-  width: 68px !important;
-}
-body.sidebar-collapsed .sidebar .logo-text,
-body.sidebar-collapsed .sidebar .side-link > :not(.side-ico),
-body.sidebar-collapsed .sidebar .sidebar-divider {
-  display: none;
-}
-body.sidebar-collapsed .sidebar .side-link {
-  justify-content: center;
-  padding: 11px 0;
-}
-body.sidebar-collapsed .sidebar .side-link:hover { padding-left: 0; }
-body.sidebar-collapsed .sidebar .sidebar-collapse svg { transform: rotate(180deg); }
-
-/* Hide collapse button on mobile — drawer uses its own close */
-@media (max-width: 900px) {
-  .sidebar-collapse { display: none; }
-}
-
-/* ============================================================
-   HERO CAROUSEL
-   ============================================================ */
-.hero-carousel {
-  position: relative;
-  max-width: 1200px;
-  margin: 24px auto 8px;
-  padding: 0 24px;
-  overflow: hidden;
-  border-radius: var(--r-lg);
 }
 .carousel-track {
   display: flex;
@@ -760,3 +719,23 @@ body.sidebar-collapsed .sidebar .sidebar-collapse svg { transform: rotate(180deg
 }
 
 
+
+/* ============================================================
+   AUTHORITATIVE SIDEBAR COLLAPSE — do not duplicate this block
+   ============================================================ */
+@media (min-width: 901px) {
+  body.sidebar-collapsed .page-shell .sidebar,
+  body.sidebar-collapsed .sidebar {
+    flex: 0 0 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
