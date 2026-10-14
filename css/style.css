@@ -875,3 +875,17 @@ body {
   .carousel-btn.prev { left: 4px !important; }
   .carousel-btn.next { right: 4px !important; }
 }
+
+/* ===== Category chips — centered ===== */
+.chips {
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  padding: 18px 24px !important;
+}
+@media (max-width: 700px) {
+  .chips {
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+  }
+}

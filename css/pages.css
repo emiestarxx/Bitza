@@ -172,3 +172,181 @@
   transform: translateX(22px);
   background: var(--black);
 }
+
+/* ===== AUTH PAGES (Sign In / Sign Up) ===== */
+.auth-wrap {
+  max-width: 440px;
+  margin: 48px auto 80px;
+  padding: 0 20px;
+}
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+.auth-card h2 {
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.auth-card .muted {
+  margin-bottom: 12px;
+}
+.auth-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+.auth-card input {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.auth-card input:focus { border-color: var(--green); }
+.auth-card .btn { margin-top: 14px; }
+.auth-switch {
+  text-align: center;
+  margin-top: 8px;
+}
+.auth-switch a {
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: none;
+}
+.auth-switch a:hover { text-decoration: underline; }
+
+/* ===== Auth card — force labels above inputs ===== */
+.auth-card { display: block; }
+.auth-card > * { display: block; width: 100%; margin-bottom: 10px; }
+.auth-card .auth-label {
+  display: block !important;
+  margin-bottom: 6px !important;
+  margin-top: 8px !important;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.auth-card input {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 4px !important;
+}
+.auth-card h2 { margin-bottom: 6px !important; }
+.auth-card .muted { margin-bottom: 14px !important; }
+.auth-card .btn { margin-top: 18px !important; }
+.auth-card .auth-switch { text-align: center; margin-top: 12px !important; }
+
+/* ============================================================
+   AUTH CARD — matches site dark theme
+   ============================================================ */
+.auth-wrap {
+  max-width: 440px;
+  margin: 48px auto 80px;
+  padding: 0 20px;
+}
+.auth-card { display: block; }
+
+
+.auth-card h2 {
+  color: var(--text) !important;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px !important;
+}
+.auth-card .muted {
+  color: var(--text-dim) !important;
+  font-size: 14px;
+  margin-bottom: 16px !important;
+}
+.auth-card .auth-label {
+  color: var(--text-dim) !important;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px !important;
+  margin-bottom: 6px !important;
+}
+.auth-card input {
+  background: var(--input-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  padding: 12px 14px !important;
+  border-radius: var(--r-sm) !important;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+.auth-card input::placeholder { color: var(--text-dim); }
+.auth-card input:focus { border-color: var(--green) !important; }
+
+.auth-card .btn.primary {
+  background: var(--green) !important;
+  color: var(--black) !important;
+  margin-top: 18px !important;
+  padding: 14px 20px !important;
+  font-weight: 800;
+  border-radius: var(--r-md);
+}
+.auth-card .btn.primary:hover {
+  background: var(--green-dark) !important;
+  color: #fff !important;
+}
+
+.auth-card .auth-switch {
+  text-align: center;
+  margin-top: 14px !important;
+  font-size: 13px;
+}
+.auth-card .auth-switch a {
+  color: var(--green) !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+.auth-card .auth-switch a:hover { text-decoration: underline; }
+
+
+/* ===== Auth card final ===== */
+.auth-wrap { max-width: 440px !important; margin: 48px auto 80px !important; padding: 0 20px !important; }
+.auth-card {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 32px 28px !important;
+  box-shadow: var(--shadow) !important;
+}
+/* Do NOT touch display on .auth-card — JS controls show/hide */
+.auth-card h2 { color: var(--text) !important; font-size: 24px; font-weight: 800; margin-bottom: 6px !important; }
+.auth-card .muted { color: var(--text-dim) !important; font-size: 14px; margin-bottom: 16px !important; }
+.auth-card .auth-label { display: block !important; color: var(--text-dim) !important; font-size: 13px; font-weight: 600; margin: 10px 0 6px !important; }
+.auth-card input {
+  display: block !important;
+  width: 100% !important;
+  background: var(--input-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  padding: 12px 14px !important;
+  border-radius: var(--r-sm) !important;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+.auth-card input:focus { border-color: var(--green) !important; }
+.auth-card .btn.primary { margin-top: 18px !important; padding: 14px 20px !important; font-weight: 800; }
+.auth-card .auth-switch { text-align: center; margin-top: 14px !important; font-size: 13px; }
+.auth-card .auth-switch a { color: var(--green) !important; font-weight: 700; text-decoration: none; }

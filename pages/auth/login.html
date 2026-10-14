@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../../css/variables.css" />
 <link rel="stylesheet" href="../../css/style.css" />
 <link rel="stylesheet" href="../../css/components.css" />
+<link rel="stylesheet" href="../../css/pages.css" />
 </head>
 <body>
 
@@ -21,56 +22,57 @@
   <div class="topnav-right"></div>
 </header>
 
-<main style="max-width:440px;margin:50px auto;padding:0 20px">
-
-  <!-- LOGIN VIEW -->
-  <div class="modal-card" id="loginView" style="position:static;max-width:100%">
-    <h3>Welcome back</h3>
-    <p class="muted">Log in to save items and chat with sellers.</p>
-    <input type="email" placeholder="Email address" />
-    <input type="password" placeholder="Password" />
-    <button class="btn primary full">Log In</button>
-    <p class="muted small">New here?
-      <a href="#" id="showSignup">Create an account</a>
-    </p>
+<main class="auth-wrap">
+  <div class="auth-card" id="loginView">
+    <h2>Welcome back</h2>
+    <p class="muted">Sign in to save items, chat with sellers, and manage your listings.</p>
+    <label class="auth-label">Email</label>
+    <input type="email" placeholder="you@example.com" />
+    <label class="auth-label">Password</label>
+    <input type="password" placeholder="••••••••" />
+    <button class="btn primary full">Sign In</button>
+    <p class="muted small auth-switch">New here? <a href="#" id="showSignup">Create an account</a></p>
   </div>
 
-  <!-- SIGNUP VIEW -->
-  <div class="modal-card" id="signupView" style="position:static;max-width:100%;display:none">
-    <h3>Create your account</h3>
+  <div class="auth-card" id="signupView" style="display:none">
+    <h2>Create your account</h2>
     <p class="muted">Join Bitza — it's free.</p>
-    <input type="text" placeholder="Full name" />
-    <input type="email" placeholder="Email address" />
-    <input type="tel" placeholder="Phone number" />
+    <label class="auth-label">Full name</label>
+    <input type="text" placeholder="Ada Obi" />
+    <label class="auth-label">Email</label>
+    <input type="email" placeholder="you@example.com" />
+    <label class="auth-label">Phone</label>
+    <input type="tel" placeholder="+234 800 000 0000" />
+    <label class="auth-label">Password</label>
     <input type="password" placeholder="Create a password" />
+    <label class="auth-label">Confirm password</label>
     <input type="password" placeholder="Confirm password" />
     <button class="btn primary full">Create Account</button>
-    <p class="muted small">Already have an account?
-      <a href="#" id="showLogin">Log in</a>
-    </p>
+    <p class="muted small auth-switch">Already have an account? <a href="#" id="showLogin">Sign in</a></p>
   </div>
-
 </main>
 
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
-
     const loginView = document.getElementById('loginView');
     const signupView = document.getElementById('signupView');
-
     document.getElementById('showSignup').onclick = (e) => {
       e.preventDefault();
       loginView.style.display = 'none';
-      signupView.style.display = 'flex';
+      signupView.style.display = 'block';
     };
     document.getElementById('showLogin').onclick = (e) => {
       e.preventDefault();
       signupView.style.display = 'none';
-      loginView.style.display = 'flex';
+      loginView.style.display = 'block';
     };
   });
 </script>
+<script src="../../js/theme.js"></script>
 </body>
 </html>
+
+
+

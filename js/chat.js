@@ -94,4 +94,5 @@ function sendChat() {
   }, 900);
 }
 
-document.addEventListener('DOMContentLoaded', chatInit);
+// chatInit disabled — chat now lives inside the product modal
+

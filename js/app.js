@@ -404,3 +404,86 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window._bitzaCarouselInterval) clearInterval(window._bitzaCarouselInterval);
   window._bitzaCarouselInterval = setInterval(goNext, 6000);
 });
+
+/* ============================================================
+   INLINE CHAT INSIDE PRODUCT MODAL
+   ============================================================ */
+(function () {
+  const origShowProduct = showProduct;
+  window.showProduct = function (p) {
+    origShowProduct(p);
+
+    // Wait for the modal markup to render, then inject chat
+    setTimeout(() => {
+      const container = document.getElementById('productDetail');
+      if (!container) return;
+      if (container.querySelector('.chat-inline')) return;   // already there
+
+      const chatPanel = document.createElement('div');
+      chatPanel.className = 'chat-inline';
+      chatPanel.innerHTML =
+        '<h4>💬 Chat with ' + p.seller + '</h4>' +
+        '<div class="chat-log" id="modalChatLog"></div>' +
+        '<div class="chat-input-row" style="display:flex;gap:6px">' +
+          '<input id="modalChatInput" type="text" placeholder="Type a message..." />' +
+          '<button class="chat-send" id="modalChatSend">Send</button>' +
+        '</div>';
+
+      container.appendChild(chatPanel);
+
+      const log = chatPanel.querySelector('#modalChatLog');
+      const input = chatPanel.querySelector('#modalChatInput');
+      const send = chatPanel.querySelector('#modalChatSend');
+
+      function render() {
+        const messages = window._modalChat || [];
+        if (messages.length === 0) {
+          log.innerHTML = '<div class="chat-msg them">Hi! Ask me anything about this item. 💚</div>';
+          return;
+        }
+        log.innerHTML = messages.map(m =>
+          '<div class="chat-msg ' + (m.from === 'me' ? 'me' : 'them') + '">' + m.text + '</div>'
+        ).join('');
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function doSend() {
+        const text = input.value.trim();
+        if (!text) return;
+        window._modalChat = window._modalChat || [];
+        window._modalChat.push({ from: 'me', text });
+        input.value = '';
+        render();
+        // Fake reply
+        setTimeout(() => {
+          window._modalChat.push({ from: 'them', text: 'Thanks! Still available. When can you come see it?' });
+          render();
+        }, 900);
+      }
+
+      send.onclick = doSend;
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') doSend(); });
+
+      // Restart chat for each product (clear when opening a new one)
+      if (window._lastChatProduct !== p.id) {
+        window._modalChat = [];
+        window._lastChatProduct = p.id;
+      }
+      render();
+
+      // Try to hook the "Reveal to buy" flow so the chat opens after contact is revealed
+      const revealBtn = document.getElementById('revealContact');
+      if (revealBtn) {
+        const origReveal = revealBtn.onclick;
+        revealBtn.onclick = (e) => {
+          if (typeof origReveal === 'function') origReveal.call(revealBtn, e);
+          // scroll chat into view
+          chatPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        };
+      }
+    }, 60);
+  };
+
+  // Also override any reference inside other scripts
+  window.openChat = function () { /* no-op — chat is inline now */ };
+})();

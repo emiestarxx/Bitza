@@ -405,3 +405,36 @@
   display: block;
 }
 .card-img { overflow: hidden; }
+
+/* ===== Hide the floating chat launcher (chat now in modal) ===== */
+.chat-launcher { display: none !important; }
+
+/* ===== Chat inside product modal ===== */
+.product-detail .chat-inline {
+  margin-top: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-detail .chat-inline h4 {
+  color: var(--green);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.product-detail .chat-log {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+}
+.product-detail .chat-input-row input {
+  flex: 1;
+}
