@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bitza — Buy & Sell Locally</title>
+<link rel="stylesheet" href="css/variables.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <a href="index.html" class="logo logo-center">
+    <span class="logo-mark">B</span>
+    <span class="logo-text">Bit<em>za</em></span>
+  </a>
+
+  <div class="topnav-right">
+    <button class="icon-btn" id="searchBtn" aria-label="Search">
+      <i data-lucide="search"></i>
+    </button>
+    <button class="icon-btn wishlist-btn" id="wishlistBtn" aria-label="Saved items">
+      <i data-lucide="heart"></i>
+      <span class="wishlist-count" id="wishlistCount">0</span>
+    </button>
+    <a href="pages/auth/login.html" class="nav-btn primary">Sign In</a>
+  </div>
+</header>
+
+<div class="warning-banner" id="warningBanner">
+  <span class="warn-icon">⚠️</span>
+  <div class="warn-text">
+    <strong>SAFETY FIRST:</strong> Never send money before seeing the product in person. Always meet in a <strong>public place</strong>. If a deal feels off — walk away.
+  </div>
+  <button class="warn-close" onclick="document.getElementById('warningBanner').style.display='none'">✕</button>
+</div>
+
+<button class="hamburger" id="hamburger" aria-label="Open menu" style="display:none !important;">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="page-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-text">Cate<em>gories</em></span>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="side-link active" data-cat="All"><span class="side-ico"><i data-lucide="home"></i></span> All Listings</a>
+      <a href="#" class="side-link" data-cat="Phones"><span class="side-ico"><i data-lucide="smartphone"></i></span> Phones &amp; Tablets</a>
+      <a href="#" class="side-link" data-cat="Vehicles"><span class="side-ico"><i data-lucide="car"></i></span> Vehicles</a>
+      <a href="#" class="side-link" data-cat="Electronics"><span class="side-ico"><i data-lucide="laptop"></i></span> Electronics</a>
+      <a href="#" class="side-link" data-cat="Fashion"><span class="side-ico"><i data-lucide="shirt"></i></span> Fashion</a>
+      <a href="#" class="side-link" data-cat="Home"><span class="side-ico"><i data-lucide="house"></i></span> Home &amp; Furniture</a>
+      <a href="#" class="side-link" data-cat="Services"><span class="side-ico"><i data-lucide="wrench"></i></span> Services</a>
+      <a href="#" class="side-link" data-cat="Jobs"><span class="side-ico"><i data-lucide="briefcase"></i></span> Jobs</a>
+      <div class="sidebar-divider"></div>
+      <a href="pages/vendor/dashboard.html" class="side-link"><span class="side-ico"><i data-lucide="layout-dashboard"></i></span> Vendor Dashboard</a>
+      <a href="pages/vendor/store.html" class="side-link"><span class="side-ico"><i data-lucide="store"></i></span> Sample Vendor Store</a>
+      <a href="pages/user/account.html" class="side-link"><span class="side-ico"><i data-lucide="user"></i></span> My Account</a>
+      <a href="pages/user/settings.html" class="side-link"><span class="side-ico"><i data-lucide="settings"></i></span> Settings</a>
+    </nav>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="content-area">
+    <section class="hero">
+      <h1>What are you looking for <em>today?</em></h1>
+      <p class="hero-sub">Buy &amp; sell directly with people near you — no middlemen, no fees.</p>
+      <p class="hero-note"><span class="hero-shield">🛡️</span> Never pay before you see the item — always meet in a public place.</p>
+    </section>
+
+    <section class="chips">
+      <button class="chip active">All</button>
+      <button class="chip">Phones</button>
+      <button class="chip">Vehicles</button>
+      <button class="chip">Electronics</button>
+      <button class="chip">Fashion</button>
+      <button class="chip">Home</button>
+      <button class="chip">Services</button>
+      <button class="chip">Jobs</button>
+    </section>
+
+    <main class="container">
+      <h2 class="section-title">Fresh Listings Near You</h2>
+      <div class="grid" id="productGrid"></div>
+    </main>
+  </div>
+
+</div>
+
+<div class="modal" id="searchModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('searchModal')">✕</button>
+    <h3>Search Bitza</h3>
+    <div class="search-modal-input">
+      <i data-lucide="search"></i>
+      <input id="modalSearchInput" type="text" placeholder="Phones, cars, sofas…" autocomplete="off" />
+    </div>
+    <button class="btn primary full" id="modalSearchGo">Search</button>
+  </div>
+</div>
+
+<div class="modal" id="productModal">
+  <div class="modal-card wide">
+    <button class="modal-close" onclick="closeModal('productModal')">✕</button>
+    <div class="product-detail" id="productDetail"></div>
+  </div>
+</div>
+
+<div class="modal" id="wishlistModal">
+  <div class="modal-card wide">
+    <button class="modal-close" onclick="closeModal('wishlistModal')">✕</button>
+    <h3>Your Saved Items</h3>
+    <div id="wishlistContent"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col brand-col">
+      <div class="footer-logo">
+        <span class="logo-mark">B</span>
+        <span class="logo-text">Bit<em>za</em></span>
+      </div>
+      <p class="footer-blurb">A classifieds meeting point: buyers and sellers deal directly — Bitza never holds your money and never charges a "release fee".</p>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-title">Browse safely</h4>
+      <ul class="footer-list check-list">
+        <li>Inspect every item before paying</li>
+        <li>Meet in public, well-lit places</li>
+        <li>Never send deposits or "delivery fees"</li>
+        <li>Keep chatting until you've met in person</li>
+        <li>Report ads that look too cheap to be true</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-title">Support</h4>
+      <ul class="footer-list">
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Safety Guidelines</a></li>
+        <li><a href="#">Report a Listing</a></li>
+        <li><a href="#">How to Buy</a></li>
+        <li><a href="#">How to Sell</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 class="footer-title">Contact us</h4>
+      <ul class="footer-list contact-list">
+        <li><span class="footer-ico"><i data-lucide="mail"></i></span><a href="mailto:hello@bitza.example">hello@bitza.example</a></li>
+        <li><span class="footer-ico"><i data-lucide="phone"></i></span><a href="tel:+2348000000000">+234 800 000 0000</a></li>
+        <li><span class="footer-ico"><i data-lucide="message-circle"></i></span><a href="#">WhatsApp Support</a></li>
+      </ul>
+      <h4 class="footer-title" style="margin-top:22px;">Follow us</h4>
+      <div class="social-row">
+        <a href="#" class="social-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        <a href="#" class="social-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+        <a href="#" class="social-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+        <a href="#" class="social-btn" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Bitza — demo marketplace. Every listing, vendor, phone number and email on this page is fictional.</p>
+    <p class="footer-built">🛡️ Built for safe trading</p>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/api.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/wishlist.js"></script>
+<script src="js/app.js"></script>
+<script src="js/chat.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  });
+</script> 
+</body>
+</html>
+
+
+

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — Bitza</title>
+<link rel="stylesheet" href="../../css/variables.css" />
+<link rel="stylesheet" href="../../css/style.css" />
+<link rel="stylesheet" href="../../css/components.css" />
+<link rel="stylesheet" href="../../css/pages.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+    <i data-lucide="menu"></i>
+  </button>
+  <a href="../../index.html" class="logo logo-center">
+    <span class="logo-mark">B</span>
+    <span class="logo-text">Bit<em>za</em></span>
+  </a>
+  <div class="topnav-right">
+    <a href="../../index.html" class="icon-btn" aria-label="Back">
+      <i data-lucide="arrow-left"></i>
+    </a>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="dash-title">Settings</h1>
+
+  <section class="dash-section">
+    <h2>Appearance</h2>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Dark mode</div>
+        <div class="settings-hint">Bitza uses a dark theme by default. Toggle it off if you prefer light.</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle" checked />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </section>
+
+  <section class="dash-section">
+    <h2>Data</h2>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Saved items</div>
+        <div class="settings-hint" id="wishlistHint">You have 0 saved items.</div>
+      </div>
+      <button class="btn ghost" id="clearWishlistBtn">Clear wishlist</button>
+    </div>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Chat history</div>
+        <div class="settings-hint">Clear all messages from the in-app chat.</div>
+      </div>
+      <button class="btn ghost" id="clearChatBtn">Clear chat</button>
+    </div>
+  </section>
+
+  <section class="dash-section">
+    <h2>Account</h2>
+    <div class="settings-row">
+      <div>
+        <div class="settings-label">Sign out</div>
+        <div class="settings-hint">You'll be returned to the sign-in page.</div>
+      </div>
+      <button class="btn ghost" onclick="window.location.href='../auth/login.html'">Sign out</button>
+    </div>
+  </section>
+</main>
+
+<script src="../../js/products.js"></script>
+<script src="../../js/wishlist.js"></script>
+<script src="../../js/chat.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    const darkToggle = document.getElementById('darkModeToggle');
+    const current = localStorage.getItem('bitza-theme') || 'dark';
+    darkToggle.checked = current === 'dark';
+    darkToggle.onchange = () => {
+      const theme = darkToggle.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('bitza-theme', theme);
+    };
+
+    // Wishlist hint
+    const wl = typeof getWishlist === 'function' ? getWishlist() : [];
+    const hint = document.getElementById('wishlistHint');
+    if (hint) hint.textContent = 'You have ' + wl.length + ' saved item' + (wl.length === 1 ? '' : 's') + '.';
+
+    document.getElementById('clearWishlistBtn').onclick = () => {
+      if (confirm('Remove all saved items?')) {
+        localStorage.setItem('bitza-wishlist', '[]');
+        if (hint) hint.textContent = 'You have 0 saved items.';
+      }
+    };
+    document.getElementById('clearChatBtn').onclick = () => {
+      if (confirm('Clear all chat messages?')) {
+        localStorage.removeItem('bitza-chat');
+        alert('Chat cleared.');
+      }
+    };
+  });
+</script>
+</body>
+</html>

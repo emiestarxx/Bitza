@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Dashboard — Bitza</title>
+<link rel="stylesheet" href="../../css/variables.css" /><link rel="stylesheet" href="../../css/style.css" /><link rel="stylesheet" href="../../css/components.css" /><link rel="stylesheet" href="../../css/pages.css" />
+</head><body>
+<header class="topbar">
+  <a href="../../index.html" class="icon-btn" aria-label="Back">
+    <i data-lucide="arrow-left"></i>
+  </a>
+  <a href="../../index.html" class="logo logo-center">
+    <span class="logo-mark">B</span>
+    <span class="logo-text">Bit<em>za</em></span>
+  </a>
+  <div class="topnav-right">
+    <a href="store.html" class="nav-btn primary">View store</a>
+  </div>
+</header>
+<main class="container">
+<h1 class="dash-title">My Dashboard</h1>
+<div class="dash-stats"><div class="stat-card"><span class="stat-num">14</span><span>Active listings</span></div><div class="stat-card"><span class="stat-num">62</span><span>Total views</span></div><div class="stat-card"><span class="stat-num">4.8★</span><span>Rating</span></div><div class="stat-card green"><span class="stat-num">3</span><span>New messages</span></div></div>
+<section class="dash-section"><h2>Post a new listing</h2><form id="postForm" class="dash-form"><input type="text" placeholder="Title" required /><input type="text" placeholder="Price (₦)" required /><input type="text" placeholder="Location" required /><select><option>Phones</option><option>Vehicles</option><option>Electronics</option><option>Fashion</option><option>Home</option><option>Services</option><option>Jobs</option></select><input type="tel" placeholder="Phone number" required /><input type="email" placeholder="Email" required /><textarea placeholder="Description"></textarea><button class="btn primary" type="submit">Post listing</button></form></section>
+<section class="dash-section"><h2>Your listings</h2><div id="myListings" class="dash-list"></div></section>
+</main>
+<script src="../../js/products.js"></script><script src="../../js/vendor.js"></script><script src="../../js/chat.js"></script><script src="../../js/theme.js"></script><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script><script>lucide.createIcons();</script></body></html>
+
