@@ -370,3 +370,37 @@ document.addEventListener('DOMContentLoaded', () => {
   window._bitzaCarouselInterval && clearInterval(window._bitzaCarouselInterval);
   window._bitzaCarouselInterval = setInterval(goNext, 6000);
 });
+
+/* ===== Carousel: advance exactly one slide per click/interval ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+
+  const slideWidth = () => {
+    const s = track.querySelector('.carousel-slide');
+    return s ? s.offsetWidth : 300;
+  };
+
+  const goNext = () => {
+    const w = slideWidth();
+    const max = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= max - 5) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: w, behavior: 'smooth' });
+    }
+  };
+
+  const goPrev = () => {
+    track.scrollBy({ left: -slideWidth(), behavior: 'smooth' });
+  };
+
+  const prev = document.getElementById('carouselPrev');
+  const next = document.getElementById('carouselNext');
+  if (prev) prev.onclick = goPrev;
+  if (next) next.onclick = goNext;
+
+  // Reset auto-advance
+  if (window._bitzaCarouselInterval) clearInterval(window._bitzaCarouselInterval);
+  window._bitzaCarouselInterval = setInterval(goNext, 6000);
+});
