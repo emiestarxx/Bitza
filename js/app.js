@@ -224,3 +224,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 })();
+
+/* ===== Desktop sidebar collapse ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('sidebarCollapse');
+  if (!btn) return;
+  btn.onclick = () => {
+    document.body.classList.toggle('sidebar-collapsed');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
+});
+
+
+
+/* ===== Sidebar tooltips ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.side-link').forEach(link => {
+    const icon = link.querySelector('.side-ico');
+    if (!icon) return;
+    const text = link.textContent.trim();
+    if (text && !link.title) link.title = text;
+  });
+});

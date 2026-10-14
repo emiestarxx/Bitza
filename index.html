@@ -25,10 +25,6 @@
     <button class="icon-btn" id="searchBtn" aria-label="Search">
       <i data-lucide="search"></i>
     </button>
-    <button class="icon-btn wishlist-btn" id="wishlistBtn" aria-label="Saved items">
-      <i data-lucide="heart"></i>
-      <span class="wishlist-count" id="wishlistCount">0</span>
-    </button>
     <a href="pages/auth/login.html" class="nav-btn primary">Sign In</a>
   </div>
 </header>
@@ -48,7 +44,7 @@
 <div class="page-shell">
 
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
+    <button class="sidebar-collapse" id="sidebarCollapse" aria-label="Collapse menu"><i data-lucide="chevrons-left"></i></button><div class="sidebar-header">
       <span class="logo-text">Cate<em>gories</em></span>
       <button class="sidebar-close" id="sidebarClose">✕</button>
     </div>
@@ -72,10 +68,11 @@
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <div class="content-area">
-    <section class="hero">
-      <h1>What are you looking for <em>today?</em></h1>
-      <p class="hero-sub">Buy &amp; sell directly with people near you — no middlemen, no fees.</p>
-      <p class="hero-note"><span class="hero-shield">🛡️</span> Never pay before you see the item — always meet in a public place.</p>
+    <section class="hero-carousel" id="heroCarousel">
+      <div class="carousel-track" id="carouselTrack"></div>
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous">‹</button>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Next">›</button>
+      <div class="carousel-dots" id="carouselDots"></div>
     </section>
 
     <section class="chips">
@@ -189,6 +186,9 @@
 </script> 
 </body>
 </html>
+
+
+
 
 
 

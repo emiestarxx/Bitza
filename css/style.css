@@ -602,3 +602,216 @@ body {
   .icon-btn { width: 32px !important; height: 32px !important; }
   .icon-btn svg { width: 14px !important; height: 14px !important; }
 }
+
+/* ============================================================
+   DESKTOP SIDEBAR COLLAPSE
+   ============================================================ */
+.sidebar-collapse {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  transition: 0.2s;
+}
+.sidebar-collapse:hover { color: var(--green); border-color: var(--green); }
+.sidebar-collapse svg { width: 16px; height: 16px; transition: transform 0.25s; }
+.sidebar { position: relative; }
+
+/* Collapsed state */
+body.sidebar-collapsed .sidebar {
+  flex: 0 0 68px !important;
+  width: 68px !important;
+}
+body.sidebar-collapsed .sidebar .logo-text,
+body.sidebar-collapsed .sidebar .side-link > :not(.side-ico),
+body.sidebar-collapsed .sidebar .sidebar-divider {
+  display: none;
+}
+body.sidebar-collapsed .sidebar .side-link {
+  justify-content: center;
+  padding: 11px 0;
+}
+body.sidebar-collapsed .sidebar .side-link:hover { padding-left: 0; }
+body.sidebar-collapsed .sidebar .sidebar-collapse svg { transform: rotate(180deg); }
+
+/* Hide collapse button on mobile — drawer uses its own close */
+@media (max-width: 900px) {
+  .sidebar-collapse { display: none; }
+}
+
+/* ============================================================
+   HERO CAROUSEL
+   ============================================================ */
+.hero-carousel {
+  position: relative;
+  max-width: 1200px;
+  margin: 24px auto 8px;
+  padding: 0 24px;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+}
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 6px;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-slide {
+  flex: 0 0 calc(50% - 8px);
+  scroll-snap-align: start;
+  position: relative;
+  height: 240px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.carousel-slide:hover { transform: scale(1.01); border-color: var(--green); }
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-slide .slide-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  color: #fff;
+}
+.carousel-slide .slide-title { font-size: 15px; font-weight: 800; }
+.carousel-slide .slide-price { font-size: 13px; color: var(--green); font-weight: 700; }
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+  font-size: 20px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+  backdrop-filter: blur(4px);
+  transition: 0.2s;
+}
+.carousel-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+.carousel-btn.prev { left: 34px; }
+.carousel-btn.next { right: 34px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.carousel-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dots span.active { background: var(--green); transform: scale(1.3); }
+
+@media (max-width: 900px) {
+  .carousel-slide { flex: 0 0 calc(70% - 8px); height: 200px; }
+  .carousel-btn.prev { left: 30px; }
+  .carousel-btn.next { right: 30px; }
+}
+@media (max-width: 560px) {
+  .carousel-slide { flex: 0 0 calc(85% - 8px); height: 170px; }
+  .carousel-btn { width: 34px; height: 34px; font-size: 16px; }
+}
+
+/* ===== Footer matches topbar ===== */
+.footer {
+  background: var(--black-soft) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* ============================================================
+   COLLAPSED SIDEBAR — clean version
+   ============================================================ */
+.sidebar-collapse {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+  transition: 0.2s;
+  padding: 0;
+}
+.sidebar-collapse:hover { color: var(--green); border-color: var(--green); }
+.sidebar-collapse svg { width: 16px; height: 16px; transition: transform 0.25s; }
+
+body.sidebar-collapsed .sidebar {
+  flex: 0 0 68px !important;
+  width: 68px !important;
+  overflow-x: hidden !important;
+}
+body.sidebar-collapsed .sidebar .sidebar-header .logo-text {
+  display: none !important;
+}
+body.sidebar-collapsed .sidebar .side-link {
+  justify-content: center !important;
+  padding: 12px 0 !important;
+  font-size: 0 !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
+body.sidebar-collapsed .sidebar .side-link .side-ico,
+body.sidebar-collapsed .sidebar .side-link .side-ico svg {
+  font-size: 16px !important;
+  margin: 0 !important;
+}
+body.sidebar-collapsed .sidebar .side-ico {
+  width: 24px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+body.sidebar-collapsed .sidebar .sidebar-divider {
+  margin: 10px 14px !important;
+}
+body.sidebar-collapsed .sidebar .sidebar-collapse {
+  right: 50% !important;
+  transform: translateX(50%) !important;
+}
+body.sidebar-collapsed .sidebar .sidebar-collapse svg {
+  transform: rotate(180deg);
+}
+
+/* Hide collapse button on mobile (drawer uses its own close) */
+@media (max-width: 900px) {
+  .sidebar-collapse { display: none !important; }
+}
